@@ -1,22 +1,10 @@
 import React, { useEffect } from 'react';
 import axios from 'axios'
+import ProductList from '../components/Index/ProductList';
 
 
 function Home({ products }) {
-
-	console.log(products);
-
-	// useEffect(() => {
-	// 	getProducts()
-	// }, [])
-
-	// async function getProducts() {
-	// 	const url = 'http://localhost:3000/api/products'
-	// 	const res = await axios.get(url)
-	// 	console.log(res.data)
-	// }
-
-	return <>home</>;
+	return <ProductList products={products}/>;
 }
 
 Home.getInitialProps = async () => {
