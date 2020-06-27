@@ -15,7 +15,7 @@ function Header() {
 	}
 	// if user is true, will show account and log-out link
 	// if user is false, will show login and sign-up link
-	const user = false;
+	const user = true;
 
 	return (
 		<Menu stackable fluid id="menu" inverted>

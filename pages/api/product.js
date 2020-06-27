@@ -9,7 +9,7 @@ export default async (req, res) => {
             await handleDeleteRequest(req, res);
             break;
         default:
-            res.status(405).send(`Method ${req.method} not allowed`) // no method or not allow
+            res.status(405).send(`Method ${req.method} not allowed`) // no method or not allowed
             break;
     }
 }
