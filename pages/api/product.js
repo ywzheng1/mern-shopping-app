@@ -1,4 +1,4 @@
-import Product from '../../models/Product'
+import Product from '../../models/Product';
 import connectDb from '../../utils/connectDb';
 
 connectDb();
@@ -28,19 +28,23 @@ async function handleGetRequest(req, res) {
 
 async function handlePostRequest(req, res) {
     const {name, price, description, mediaUrl} = req.body
-    if(!name || !price || !description ||!mediaUrl) {
-        return res.status(422).send('Product missing one or more fields') 
-        // when user hasn't include required information
+    try {
+        if(!name || !price || !description ||!mediaUrl) {
+            return res.status(422).send('Product missing one or more fields') 
+            // when user hasn't include required information
+        }
+        
+        const product = await new Product({
+            name,
+            price,
+            description,
+            mediaUrl
+        }).save()
+        res.status(201).json(product) // new source created
+    } catch(error) {
+        console.error(error);
+        res.status(500).send('Server error creating product');
     }
-    
-    const product = await new Product({
-        name,
-        price,
-        description,
-        mediaUrl
-    }).save()
-    res.status(201).json(product) // new source created
-
 }
 
 async function handleDeleteRequest(req, res) {
