@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import baseUrl from '../utils/baseUrl';
+import axios from 'axios'
 import {
   Form,
   Input,
@@ -9,12 +11,11 @@ import {
   Header,
   Icon,
 } from "semantic-ui-react";
-import { set } from 'mongoose';
 
 const INITIAL_PRODUCT = {
   name: '',
   price: '',
-  mediaL: '',
+  media: '',
   description: ''
 }
 
@@ -22,6 +23,7 @@ function CreateProduct() {
   const [product, setProduct] = useState(INITIAL_PRODUCT)
   const [mediaPreview, setMediaPreview] = useState('')
   const [success, setSuccess] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   function handleChange(event) {
     const {name, value, files} = event.target
@@ -33,10 +35,28 @@ function CreateProduct() {
     }
   }
 
-  function handleSubmit(event) {
+  async function handleImageUpload() {
+    const data = new FormData()
+    data.append('file', product.media)
+    data.append('upload_preset', 'react-shopping-app')
+    data.append('cloud_name', 'dpyebagmn')
+    const response = await axios.post(process.env.CLOUDINARY_URL, data)
+    const mediaUrl = response.data.url
+    return mediaUrl
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    console.log(product);
-    setProduct(INITIAL_PRODUCT)
+    setLoading(true);
+    const mediaUrl = await handleImageUpload();
+    console.log({mediaUrl});
+    const url = `${baseUrl}/api/product`;
+    const { name, price, description } = product;
+    const payload = { name, price, description, mediaUrl };
+    const response = await axios.post(url, payload);
+    setLoading(false);
+    console.log({response});
+    setProduct(INITIAL_PRODUCT);
     setSuccess(true);
   }
 
@@ -45,7 +65,7 @@ function CreateProduct() {
       <Header as="h2" block>
         <Icon name="add" color="orange" /> Create New Product
       </Header>
-      <Form success={success} onSubmit={handleSubmit}>
+      <Form loading={loading} success={success} onSubmit={handleSubmit}>
         <Message 
           success
           icon="check"
@@ -93,6 +113,7 @@ function CreateProduct() {
         />
         <Form.Field 
           control={Button}
+          disabled={loading}
           color='blue'
           icon='pencile alternate'
           content='Submit'
