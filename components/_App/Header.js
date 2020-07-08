@@ -2,14 +2,17 @@ import { Menu, Container, Image, Icon } from "semantic-ui-react";
 import Link from "next/link";
 import Router, { useRouter } from 'next/router';
 import NProgress from 'nprogress';
+import { handleLogout } from '../../utils/auth';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 function Header({user}) {
-	console.log(user)
 	const router = useRouter();
+	const isRoot = user && user.role === 'root';
+	const isAdmin = user && user.role === 'admin';
+	const isRootOrAdmin = isRoot || isAdmin
 	
 	function isActive(route) {
 		return route === router.pathname;
@@ -36,7 +39,8 @@ function Header({user}) {
 						Cart
 					</Menu.Item>
 				</Link>
-				{user && 
+
+				{isRootOrAdmin && 
 				(<Link href='/create'>
 					<Menu.Item header active={isActive('/create')}>
 						<Icon name='add square'size='large'/>
@@ -52,7 +56,7 @@ function Header({user}) {
 					</Menu.Item>
 				</Link>
 
-				<Menu.Item header>
+				<Menu.Item onClick={handleLogout} header>
 					<Icon name='sign out'size='large'/>
 					Logout
 				</Menu.Item>
