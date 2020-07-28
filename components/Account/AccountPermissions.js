@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Header, Checkbox, Table, Icon } from 'semantic-ui-react';
 import axios from 'axios';
 import baseUrl from '../../utils/baseUrl';
@@ -48,16 +48,38 @@ function AccountPermissions() {
 }
 
 function UserPermission({user}) {
+  const [admin, setAdmin] = useState(user.role === 'admin')
+
+  const isFirstRun = useRef(true);
+
+  useEffect(() => {
+    if(isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+    updatePermission()
+  }, [admin])
+
+  function handleChangePermission() {
+    setAdmin(prevState => !prevState)
+  }
+
+  async function updatePermission() {
+    const url = `${baseUrl}/api/account`
+    const payload = { _id: user._id, role: admin ? "admin" : "user" }
+    await axios.put(url, payload)
+  }
+
   return(
     <Table.Row>
       <Table.Cell collapsing>
-        <Checkbox toggle />
+        <Checkbox checked={admin} toggle onChange={handleChangePermission} />
       </Table.Cell>
       <Table.Cell>{user.name}</Table.Cell>
       <Table.Cell>{user.email}</Table.Cell>
       <Table.Cell>{user.createdAt}</Table.Cell>
       <Table.Cell>{user.updatedAt}</Table.Cell>
-      <Table.Cell>{user.role}</Table.Cell>
+      <Table.Cell>{admin ? "admin" : "user"}</Table.Cell>
     </Table.Row>
   )
 }
