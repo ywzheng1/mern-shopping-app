@@ -20,7 +20,7 @@
     "bcryptjs": "^2.4.3",
     "js-cookie": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.6.7",
+    "mongoose": "^5.7.5",
     "next": "^9.0.2",
     "node-sass": "^4.14.1",
     "nookies": "^2.0.8",
