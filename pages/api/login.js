@@ -1,6 +1,6 @@
 import connectDb from '../../utils/connectDb';
 import User from '../../models/User';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 connectDb()

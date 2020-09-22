@@ -1,7 +1,7 @@
 import connectDb from '../../utils/connectDb';
 import User from '../../models/User';
 import Cart from '../../models/Cart';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import isEmail from 'validator/lib/isEmail';
 import isLength from 'validator/lib/isLength';
@@ -34,7 +34,7 @@ export default async (req, res) => {
             email,
             password: hash
         }).save()
-        console.log({newUser})
+        // console.log('hash password: ' + {hash})
         // 5) create cart for new user
         await new Cart({ user: newUser._id }).save()
         // 6) create token for the new user
