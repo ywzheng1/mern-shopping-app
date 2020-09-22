@@ -1,24 +1,26 @@
-import { Card } from 'semantic-ui-react';
+import { Card, Col, Row, Image } from 'antd';
 
 function ProductList({ products }) {
-  const mapProductsToItems = (products) => {
-    return products.map(product => ({
-      header: product.name,
-      image: product.mediaUrl,
-      meta: `$${product.price}`,
-      color: 'olive',
-      fluid: true,
-      childKey: product._id,
-      href: `/product?_id=${product._id}`
-    }))
-  }
   return (
-    <Card.Group
-      stackable
-      itemsPerRow="3"
-      centered
-      items={mapProductsToItems(products)}
-    />
+    <Row gutter={[16, 32]}>
+    {
+      products.map(product => {
+        return(
+          <Col span={8} key={product._id}>
+            <Card 
+              key={product._id} 
+              hoverable
+              cover={<img alt="example"src={product.mediaUrl} />}
+              bodyStyle={{marginBottom: "-5px"}}
+            >
+              <h3>{product.name}</h3>
+              <div>${product.price}</div>
+            </Card>
+          </Col>
+        )
+      })
+    }
+    </Row>
   );
 }
 

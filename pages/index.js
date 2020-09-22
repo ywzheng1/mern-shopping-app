@@ -4,6 +4,8 @@ import ProductList from '../components/Index/ProductList';
 import ProductPagination from '../components/Index/ProductPagination';
 import baseUrl from '../utils/baseUrl';
 
+import '../styles/custom-antd.css';
+
 
 function Home({ products, totalPages }) {
 	return (

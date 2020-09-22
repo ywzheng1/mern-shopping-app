@@ -1,8 +1,9 @@
-import { Menu, Container, Image, Icon } from "semantic-ui-react";
+import { Menu, Image } from 'antd';
 import Link from "next/link";
 import Router, { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 import { handleLogout } from '../../utils/auth';
+import { ShoppingCartOutlined, LoginOutlined } from '@ant-design/icons';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -12,7 +13,7 @@ function Header({user}) {
 	const router = useRouter();
 	const isRoot = user && user.role === 'root';
 	const isAdmin = user && user.role === 'admin';
-	const isRootOrAdmin = isRoot || isAdmin
+	const isRootOrAdmin = isRoot || isAdmin;
 	
 	function isActive(route) {
 		return route === router.pathname;
@@ -20,65 +21,61 @@ function Header({user}) {
 	// if user is true, will show account and log-out link
 	// if user is false, will show login and sign-up link
 
+	const StoreIcon = () => (
+		<Image 
+			width='20px'
+			height='20px'
+			src='/static/logo.svg'
+			style={{marginRight: '1em'}}
+		/>
+	)
+
 	return (
-		<Menu stackable fluid id="menu" inverted>
-			<Container text>
-				<Link href='/'>
-					<Menu.Item header active={isActive('/')}>
-						<Image 
-							size='mini'
-							src='/static/logo.svg'
-							style={{marginRight: '1em'}}
-						/>
-						Happy Shopping
-					</Menu.Item>
-				</Link>
-				<Link href='/cart'>
-					<Menu.Item header active={isActive('/cart')}>
-						<Icon name='cart'size='large'/>
-						Cart
-					</Menu.Item>
-				</Link>
+		<Menu mode="horizontal">
+				<Menu.Item><StoreIcon /></Menu.Item>
+				<Menu.Item active={isActive('/')} >
+					<Link href='/' ><a>Happy Shopping</a></Link>
+				</Menu.Item>
+
+				<Menu.Item active={isActive('/cart')} icon={<ShoppingCartOutlined />}>
+					<Link href='/cart'><a>Cart</a></Link>
+				</Menu.Item>
 
 				{isRootOrAdmin && 
-				(<Link href='/create'>
-					<Menu.Item header active={isActive('/create')}>
+				(<Menu.Item active={isActive('/create')}>
+					<Link href='/create'>
+						<>
 						<Icon name='add square'size='large'/>
 						Create
-					</Menu.Item>
-				</Link>)}
+						</>
+					</Link>
+				</Menu.Item>)}
 				
 				{user ? (<>
-				<Link href='/account'>
-					<Menu.Item header active={isActive('/account')}>
+				<Menu.Item active={isActive('/account')}>
+					<Link href='/account'>
+						<>
 						<Icon name='user'size='large'/>
 						Account
-					</Menu.Item>
-				</Link>
+						</>
+					</Link>
+				</Menu.Item>
 
-				<Menu.Item onClick={handleLogout} header>
+				<Menu.Item onClick={handleLogout}>
 					<Icon name='sign out'size='large'/>
 					Logout
 				</Menu.Item>
 				</>)
 				:
 				(<>
-				<Link href='/login'>
-					<Menu.Item header active={isActive('/login')}>
-						<Icon name='sign in'size='large'/>
-						Sign In
-					</Menu.Item>
-				</Link>
+				<Menu.Item active={isActive('/login')} icon={<LoginOutlined />}>
+					<Link href='/login'><a>Sign In</a></Link>
+				</Menu.Item>
 
-				<Link href='/signup'>
-					<Menu.Item header active={isActive('/signup')}>
-						<Icon name='signup'size='large'/>
-						Sign Up
-					</Menu.Item>
-				</Link>
+				<Menu.Item active={isActive('/signup')}>
+					<Link href='/signup'><a>Sign Up</a></Link>
+				</Menu.Item>
 				</>)}
-
-			</Container>
 		</Menu>
 	);
 }
