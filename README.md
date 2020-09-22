@@ -10,6 +10,6 @@ Live Demo: https://mern-shopping-app.now.sh/
 - :books: MongoDB
 - :rocket: axios
 - :lock: JWT
-- :key: bcrypt - password-hashing function
+- :key: bcryptjs - password-hashing function
 - :cookie: nookies
 - :credit_card: Stripe
