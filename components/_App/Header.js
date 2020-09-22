@@ -30,7 +30,7 @@ function Header({user}) {
 							src='/static/logo.svg'
 							style={{marginRight: '1em'}}
 						/>
-						React Shops
+						Happy Shopping
 					</Menu.Item>
 				</Link>
 				<Link href='/cart'>
