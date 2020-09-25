@@ -1,7 +1,6 @@
 import { Card, Col, Row } from 'antd';
 
 function ProductList({ products }) {
-
   return (
     <Row gutter={[16, 32]}>
     {
