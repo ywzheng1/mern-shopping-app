@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios'
-import ProductHeroImage from '../components/Index/ProductHeroImage';
+import ProductHeroImage from '../components/Shared/HeroImage';
 import ProductCategory from '../components/Index/ProductCategory';
 import ProductList from '../components/Index/ProductList';
 import ProductPagination from '../components/Index/ProductPagination';
@@ -10,7 +10,9 @@ import baseUrl from '../utils/baseUrl';
 function Home({ products, totalPages }) {
 	return (
 		<>
-			<ProductHeroImage />
+			<ProductHeroImage 
+				mediaUrl='https://images.unsplash.com/photo-1586105251261-72a756497a11?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1767&q=80'
+			/>
 			<ProductCategory />
 			<ProductList products={products}/>
 			<ProductPagination totalPages={totalPages} />
