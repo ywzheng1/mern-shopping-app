@@ -3,7 +3,9 @@ import Link from "next/link";
 import Router, { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 import { handleLogout } from '../../utils/auth';
-import { ShoppingCartOutlined, LoginOutlined, PlusCircleOutlined, UserOutlined } from '@ant-design/icons';
+import { ShoppingOutlined, LoginOutlined, PlusCircleOutlined, UserOutlined, AppstoreOutlined, StarOutlined } from '@ant-design/icons';
+
+const { SubMenu } = Menu;
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -31,11 +33,19 @@ function Header({user}) {
 	)
 
 	return (
-		<Menu mode="horizontal" style={{padding: '1rem'}}>
-				<Menu.Item><StoreIcon /></Menu.Item>
-				<Menu.Item active={isActive('/cart')} icon={<ShoppingCartOutlined />}>
-					<Link href='/cart'><a>Cart</a></Link>
+		<Menu mode="horizontal" style={{padding: '1rem', textAlign: 'center'}}>
+
+				<Menu.Item active={isActive('/cart')} icon={<StarOutlined />}>
+					<Link href='/cart'><a>New</a></Link>
 				</Menu.Item>
+
+				<SubMenu key="shop" icon={<AppstoreOutlined />} title="Shop">
+					<Menu.Item key="sofa">Sofa</Menu.Item>
+					<Menu.Item key="chair">Chair</Menu.Item>
+					<Menu.Item key="bedroom">Bedroom</Menu.Item>
+					<Menu.Item key="table">Table</Menu.Item>
+					<Menu.Item key="storage">Storage</Menu.Item>
+				</SubMenu>
 
 				{isRootOrAdmin && 
 				(<Menu.Item active={isActive('/create')}>
@@ -47,8 +57,15 @@ function Header({user}) {
 					</Link>
 				</Menu.Item>)}
 
-				<Menu.Item active={isActive('/')} >
+				<Menu.Item 
+					active={isActive('/')} 
+					style={{margin: '0 6rem', fontWeight: 'bold', fontSize: '2rem'}} 
+				>
 					<Link href='/' ><a>Modern Furniture</a></Link>
+				</Menu.Item>
+
+				<Menu.Item active={isActive('/cart')} icon={<ShoppingOutlined />}>
+					<Link href='/cart'><a>Cart</a></Link>
 				</Menu.Item>
 				
 				{user ? (<>
