@@ -19,7 +19,7 @@ function Layout({ children, user }) {
         <title>Happy Shop</title>
       </Head>
       <Header user={user} />
-      <div style={{ paddingTop: "1em", margin: "0 3rem" }}>
+      <div style={{ paddingTop: "1em", margin: "1rem 4rem" }}>
         {children}
       </div>
     </>

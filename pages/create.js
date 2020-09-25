@@ -15,6 +15,7 @@ import {
 
 const INITIAL_PRODUCT = {
   name: '',
+  category: '',
   price: '',
   media: '',
   description: ''
@@ -60,8 +61,8 @@ function CreateProduct() {
       setError('');
       const mediaUrl = await handleImageUpload();
       const url = `${baseUrl}/api/product`;
-      const { name, price, description } = product;
-      const payload = { name, price, description, mediaUrl };
+      const { name, category, price, description } = product;
+      const payload = { name, category, price, description, mediaUrl };
       const response = await axios.post(url, payload);
       setProduct(INITIAL_PRODUCT);
       setSuccess(true);
@@ -96,6 +97,14 @@ function CreateProduct() {
             label="Name"
             placeholder="Name"
             value={product.name}
+            onChange={handleChange}
+          />
+          <Form.Field
+            control={Input}
+            name="category"
+            label="category"
+            placeholder="category"
+            value={product.category}
             onChange={handleChange}
           />
           <Form.Field

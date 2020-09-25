@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios'
+import ProductHeroImage from '../components/Index/ProductHeroImage';
+import ProductCategory from '../components/Index/ProductCategory';
 import ProductList from '../components/Index/ProductList';
 import ProductPagination from '../components/Index/ProductPagination';
 import baseUrl from '../utils/baseUrl';
@@ -10,6 +12,8 @@ import '../styles/custom-antd.css';
 function Home({ products, totalPages }) {
 	return (
 		<>
+			<ProductHeroImage />
+			<ProductCategory />
 			<ProductList products={products}/>
 			<ProductPagination totalPages={totalPages} />
 		</>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Router, { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 import { handleLogout } from '../../utils/auth';
-import { ShoppingCartOutlined, LoginOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, LoginOutlined, PlusCircleOutlined, UserOutlined } from '@ant-design/icons';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -23,20 +23,16 @@ function Header({user}) {
 
 	const StoreIcon = () => (
 		<Image 
-			width='20px'
-			height='20px'
+			width='30px'
+			height='30px'
 			src='/static/logo.svg'
 			style={{marginRight: '1em'}}
 		/>
 	)
 
 	return (
-		<Menu mode="horizontal">
+		<Menu mode="horizontal" style={{padding: '1rem'}}>
 				<Menu.Item><StoreIcon /></Menu.Item>
-				<Menu.Item active={isActive('/')} >
-					<Link href='/' ><a>Happy Shopping</a></Link>
-				</Menu.Item>
-
 				<Menu.Item active={isActive('/cart')} icon={<ShoppingCartOutlined />}>
 					<Link href='/cart'><a>Cart</a></Link>
 				</Menu.Item>
@@ -44,25 +40,29 @@ function Header({user}) {
 				{isRootOrAdmin && 
 				(<Menu.Item active={isActive('/create')}>
 					<Link href='/create'>
-						<>
-						<Icon name='add square'size='large'/>
+						<a>
+						<PlusCircleOutlined />
 						Create
-						</>
+						</a>
 					</Link>
 				</Menu.Item>)}
+
+				<Menu.Item active={isActive('/')} >
+					<Link href='/' ><a>Modern Furniture</a></Link>
+				</Menu.Item>
 				
 				{user ? (<>
 				<Menu.Item active={isActive('/account')}>
 					<Link href='/account'>
 						<>
-						<Icon name='user'size='large'/>
+						<UserOutlined />
 						Account
 						</>
 					</Link>
 				</Menu.Item>
 
 				<Menu.Item onClick={handleLogout}>
-					<Icon name='sign out'size='large'/>
+					{/* <Icon name='sign out'size='large'/> */}
 					Logout
 				</Menu.Item>
 				</>)
