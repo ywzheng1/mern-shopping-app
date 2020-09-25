@@ -5,13 +5,14 @@ import ProductCategory from '../components/Index/ProductCategory';
 import ProductList from '../components/Index/ProductList';
 import ProductPagination from '../components/Index/ProductPagination';
 import baseUrl from '../utils/baseUrl';
+import { HOME_COVER_URL } from '../constants/images';
 
 
 function Home({ products, totalPages }) {
 	return (
 		<>
 			<ProductHeroImage 
-				mediaUrl='https://images.unsplash.com/photo-1586105251261-72a756497a11?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1767&q=80'
+				mediaUrl={HOME_COVER_URL}
 			/>
 			<ProductCategory />
 			<ProductList products={products}/>
