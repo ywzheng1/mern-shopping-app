@@ -141,7 +141,7 @@ function CreateProduct() {
           control={Button}
           disabled={disabled || loading}
           color='blue'
-          icon='pencile alternate'
+          icon='pencil alternate'
           content='Submit'
           type='submit'
         />
