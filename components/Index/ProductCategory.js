@@ -13,7 +13,7 @@ function ProductCategory() {
                             <Card 
                                 key={category}
                                 style={{ width: '200px'}}
-                                cover={<img src={CATEGORY_COVERS_URL[category]} />}
+                                cover={<img src={`${CATEGORY_COVERS_URL[category]}=format&fit=crop&w=200&h=150&q=50`} />}
                             >
                                 {category}
                             </Card>
