@@ -21,11 +21,21 @@ function DesktopHeader({isActive, isRootOrAdmin, user}) {
             </Menu.Item>
 
             <SubMenu key="shop" icon={<AppstoreOutlined />} title="Shop">
-                <Menu.Item key="sofa">Sofa</Menu.Item>
-                <Menu.Item key="chair">Chair</Menu.Item>
-                <Menu.Item key="bedroom">Bedroom</Menu.Item>
-                <Menu.Item key="table">Table</Menu.Item>
-                <Menu.Item key="storage">Storage</Menu.Item>
+                <Menu.Item key="sofa">
+                    <Link href='/category?category=sofas'>Sofa</Link>
+                </Menu.Item>
+                <Menu.Item key="chair">
+                <Link href='/category?category=chairs'>Chair</Link>
+                </Menu.Item>
+                <Menu.Item key="bedroom">
+                    <Link href='/category?category=bedroom'>Bedroom</Link>
+                </Menu.Item>
+                <Menu.Item key="table">
+                    <Link href='/category?category=tables'>Table</Link>
+                </Menu.Item>
+                <Menu.Item key="storage">
+                    <Link href='/category?category=storages'>Storage</Link>
+                </Menu.Item>
             </SubMenu>
 
             {isRootOrAdmin && 
