@@ -5,8 +5,6 @@ import baseUrl from '../utils/baseUrl';
 import { CATEGORY_COVERS_URL } from '../constants/images';
 
 function Category({ products, category }) {
-    console.log(products);
-    console.log(category);
   return (
     <>
       <HeroImage 
