@@ -53,6 +53,9 @@ function MobileHeader({isActive, isRootOrAdmin, user}) {
                 </Menu.Item>
 
                 <SubMenu key="shop" icon={<AppstoreOutlined />} title="Shop">
+                    <Menu.Item key="all">
+                        <Link href='/all'>Shop All</Link>
+                    </Menu.Item>
                     <Menu.Item key="sofa">
                         <Link href='/category?category=sofas'>Sofa</Link>
                     </Menu.Item>
