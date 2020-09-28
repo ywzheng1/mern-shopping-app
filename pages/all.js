@@ -1,19 +1,18 @@
 import axios from 'axios'
 import ProductHeroImage from '../components/Shared/HeroImage';
-import ProductCategory from '../components/Index/ProductCategory';
+import ProductList from '../components/Index/ProductList';
+import ProductPagination from '../components/Index/ProductPagination';
 import baseUrl from '../utils/baseUrl';
-import { HOME_COVER_URL } from '../constants/images';
-import ProductNewIn from '../components/Index/ProductNewIn/ProductNewIn';
+import { CATEGORY_COVERS_URL } from '../constants/images';
 
 
 function Home({ products, totalPages }) {
 	return (
 		<>
-			<ProductHeroImage mediaUrl={HOME_COVER_URL} />
-			<ProductCategory />
-			<ProductNewIn products={products} />
-			{/* <ProductList products={products} />
-			<ProductPagination totalPages={totalPages} /> */}
+            <h2>ALL PRODUCTS</h2>
+			<ProductHeroImage mediaUrl={CATEGORY_COVERS_URL.allProducts} />
+			<ProductList products={products} />
+			<ProductPagination totalPages={totalPages} />
 		</>
 	);
 }

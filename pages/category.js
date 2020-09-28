@@ -7,6 +7,7 @@ import { CATEGORY_COVERS_URL } from '../constants/images';
 function Category({ products, category }) {
   return (
     <>
+      <h2>{category.toUpperCase()}</h2>
       <HeroImage 
         mediaUrl={CATEGORY_COVERS_URL[category]}
       />
