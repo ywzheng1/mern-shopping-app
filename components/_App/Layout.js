@@ -3,6 +3,7 @@ import Header from "./Header";
 import HeadContent from "./HeadContent";
 
 import '../../styles/custom-antd.css';
+import Footer from "./Footer/Footer";
 
 function Layout({ children, user }) {
   return (
@@ -23,6 +24,7 @@ function Layout({ children, user }) {
       <div style={{ paddingTop: "1em", margin: "1rem 4rem" }}>
         {children}
       </div>
+      <Footer />
     </>
   );
 }
